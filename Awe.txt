@@ -2,194 +2,190 @@
 
 ---
 
-### 🟢 Beginner Projects
+ 🟢 Beginner Projects
 
-1. **Calculator**
+1. Calculator
    - Basic arithmetic operations
    - Bonus: add history log or keyboard support
 
-2. **Number Guessing Game**
+2. Number Guessing Game
    - Random number + user input
    - Feedback like "Too high" or "Too low"
 
-3. **To-Do List**
+3. To-Do List
    - Add, mark complete, delete tasks
    - Bonus: Save to `localStorage`
 
-4. **Digital Clock / Countdown Timer**
+4. Digital Clock / Countdown Timer
    - Real-time clock or timer with start/stop
 
-5. **Tip Calculator**
+5. Tip Calculator
    - Input bill + tip %, calculate tip and total per person
 
-6. **Form Validation**
+6. Form Validation
    - Check input fields before submission (email, password rules, etc.)
 
-7. **Quiz App**
+7. Quiz App
    - Multiple choice questions with score tracking
 
-8. **Stopwatch**
+8. Stopwatch
    - Start, stop, reset with lap tracking
 
-9. **Random Quote Generator**
+9. Random Quote Generator
    - Pull random quotes from an array or API
 
-10. **Color Picker / Random Color Generator**
+10. Color Picker / Random Color Generator
    - Change background color with button click or input
 
 ---
 
-### 🟡 Intermediate Projects
+ 🟡 Intermediate Projects
 
-1. **Weather App**
+1. Weather App
    - Fetch data from weather API and display temperature, conditions, etc.
 
-2. **Currency Converter**
+2. Currency Converter
    - Use an exchange rate API to convert currencies
 
-3. **Drum Kit / Piano App**
+3. Drum Kit / Piano App
    - Play sounds on keypress or clicks
 
-4. **Typing Speed Test**
+4. Typing Speed Test
    - Measure WPM, highlight correct/incorrect letters
 
-5. **Image Carousel / Slider**
+5. Image Carousel / Slider
    - Auto or manual image slides
 
-6. **Markdown Previewer**
+6. Markdown Previewer
    - Convert markdown to HTML in real-time
 
-7. **Drawing App / Paint Clone**
+7. Drawing App / Paint Clone
    - Canvas-based drawing with color/brush selection
 
-8. **Password Generator**
+8. Password Generator
    - Generate strong passwords with custom rules (length, symbols, etc.)
 
-9. **Pomodoro Timer**
+9. Pomodoro Timer
    - 25/5 minute timer cycle for focus sessions
 
-10. **LocalStorage Notes App**
+10. LocalStorage Notes App
    - Save and edit notes using `localStorage`
 
 ---
 
-### 🧪 Bonus: Games!
+🧪 Bonus: Games!
 
-1. **Rock Paper Scissors**
-2. **Tic-Tac-Toe**
-3. **Snake Game**
-4. **Memory Game (Card Flip Match)**
-5. **Minesweeper Lite**
-
----
-
-python
-
-
- Python
-
+1. Rock Paper Scissors
+2. Tic-Tac-Toe
+3. Snake Game
+4. Memory Game (Card Flip Match)
+5. Minesweeper Lite
 
 ---
 
-### 🟢 Beginner Python Projects
+Python
 
-1. **Number Guessing Game**
+---
+
+ 🟢 Beginner Python Projects
+
+1. Number Guessing Game
    - CLI-based: computer picks a number, user guesses
    - Add a limit to attempts or hints (hot/cold)
 
-2. **Calculator**
+2. Calculator
    - CLI math evaluator (basic operations)
    - Bonus: add advanced functions (square root, power)
 
-3. **Mad Libs Generator**
+3. Mad Libs Generator
    - Fill-in-the-blanks story generator with user inputs
 
-4. **Password Generator**
+4. Password Generator
    - Random passwords with mix of characters
    - Add custom settings (length, symbols, etc.)
 
-5. **Simple Alarm Clock**
+5. Simple Alarm Clock
    - Use `datetime` and `time` to trigger an alert sound
 
-6. **Dice Roller**
+6. Dice Roller
    - Simulate dice rolls (like D&D dice: d6, d20)
 
-7. **To-Do List (Terminal)**
+7. To-Do List (Terminal)
    - Add/remove tasks with local file storage (text file)
 
-8. **Tip Calculator**
+8. Tip Calculator
    - Input bill + tip %, split between people
 
-9. **Unit Converter**
+9. Unit Converter
    - Convert between miles/km, Celsius/Fahrenheit, etc.
 
-10. **Countdown Timer**
+10. Countdown Timer
     - Input seconds/minutes, then countdown with `time.sleep()`
 
 ---
 
-### 🟡 Intermediate Python Projects
+ 🟡 Intermediate Python Projects
 
-1. **Quiz App**
+1. Quiz App
    - Multiple choice with score tracking
    - Pull questions from JSON or API
 
-2. **Hangman Game**
+2. Hangman Game
    - Text-based with ASCII art for the gallows
 
-3. **Tic-Tac-Toe (2-player or vs computer)**
+3. Tic-Tac-Toe (2-player or vs computer)
    - Add AI with minimax if you're feeling spicy
 
-4. **Simple Contact Book**
+4. Simple Contact Book
    - Add/edit/delete/search contacts
    - Store in JSON or CSV file
 
-5. **Weather App (Terminal or GUI)**
+5. Weather App (Terminal or GUI)
    - Fetch weather data from API (like OpenWeatherMap)
 
-6. **Text-Based Adventure Game**
+6. Text-Based Adventure Game
    - Rooms, items, basic command system (go north, take key)
 
-7. **Pomodoro Timer**
+7. Pomodoro Timer
    - Time cycles with optional desktop notification
 
-8. **Simple Web Scraper**
+8. Simple Web Scraper
    - Pull data from websites using `requests` and `BeautifulSoup`
 
-9. **File Organizer**
+9. File Organizer
    - Automatically sort files into folders (like by file type)
 
-10. **Flashcard App**
+10. Flashcard App
     - Create and review cards (store in files)
 
 ---
 
-### 🧰 Tools and Utilities
+ 🧰 Tools and Utilities
 
-1. **PDF Merger/Splitter**
+1. PDF Merger/Splitter
    - Combine or split PDFs using `PyPDF2`
 
-2. **YouTube Downloader**
+2. YouTube Downloader
    - Download videos using `pytube`
 
-3. **Screenshot Tool**
+3. Screenshot Tool
    - Capture screenshots using `pyautogui`
 
-4. **Expense Tracker**
+4. Expense Tracker
    - Log and view expenses; export to CSV
 
-5. **Text-to-Speech**
+5. Text-to-Speech
    - Convert text to speech using `pyttsx3` or `gTTS`
 
 ---
 
-### 🖼 Bonus: GUI Projects with Tkinter or PyQt
+ 🖼 Bonus: GUI Projects with Tkinter or PyQt
 
-1. **Calculator App (with GUI)**
-2. **Notepad Clone**
-3. **Simple Paint App**
-4. **Currency Converter**
-5. **Weather Dashboard**
+1. Calculator App (with GUI)
+2. Notepad Clone
+3. Simple Paint App
+4. Currency Converter
+5. Weather Dashboard
 
 ---
 
