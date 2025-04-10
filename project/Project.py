@@ -6,8 +6,8 @@ PRIVATE_COACHING_COST = 30.00  # Cost per hour of private coaching
 MAX_PRIVATE_COACHING_HOURS = 5  # Max hours per week
 
 # Connect to SQLite database (or create it)
-conn = sqlite3.connect('martial_arts.db')
-c = conn.cursor()
+connection = sqlite3.connect('martial_arts.db')
+cursor = connection.cursor()
 
 # Create table for athletes
 c.execute('''
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS athletes (
     private_coaching_hours INTEGER
 )
 ''')
-conn.commit()
+connection.commit()
 
 def add_athlete():
     name = input("Enter athlete's name: ")
@@ -41,7 +41,7 @@ def add_athlete():
     INSERT INTO athletes (name, martial_art, current_weight, competition_weight, competitions_entered, private_coaching_hours)
     VALUES (?, ?, ?, ?, ?, ?)
     ''', (name, martial_art, current_weight, competition_weight, competitions_entered, private_coaching_hours))
-    conn.commit()
+    connection.commit()
 
     # Calculate costs
     calculate_costs(name, current_weight, competition_weight, competitions_entered, private_coaching_hours)
@@ -78,7 +78,7 @@ def main():
             print("Invalid choice. Please try again.")
 
     # Close the database connection
-    conn.close()
+    connection.close()
 
 if __name__ == "__main__":
     main()
