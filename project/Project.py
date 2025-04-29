@@ -1,84 +1,134 @@
 import sqlite3
 
-# Constants for costs
-COMPETITION_COST = 50.00  # Cost per competition
-PRIVATE_COACHING_COST = 30.00  # Cost per hour of private coaching
-MAX_PRIVATE_COACHING_HOURS = 5  # Max hours per week
-
-# Connect to SQLite database (or create it)
-connection = sqlite3.connect('martial_arts.db')
+connection = sqlite3.connect("athletes.db")
 cursor = connection.cursor()
 
-# Create table for athletes
-c.execute('''
+cursor.execute("""
 CREATE TABLE IF NOT EXISTS athletes (
     id INTEGER PRIMARY KEY,
     name TEXT,
-    martial_art TEXT,
-    current_weight REAL,
-    competition_weight REAL,
-    competitions_entered INTEGER,
-    private_coaching_hours INTEGER
+    martial_arts TEXT,
+    weight REAL,
+    comp_category TEXT,
+    competitions INTEGER,
+    private_hours INTEGER
 )
-''')
+""")
 connection.commit()
 
-def add_athlete():
-    name = input("Enter athlete's name: ")
-    martial_art = input("Enter martial arts studied (Judo, Jiu-Jitsu, Karate): ")
-    current_weight = float(input("Enter current weight in kg: "))
-    competition_weight = float(input("Enter competition weight category in kg: "))
-    competitions_entered = int(input("Enter number of competitions entered this month: "))
-    private_coaching_hours = int(input("Enter number of hours of private coaching (max 5): "))
+#error handling
 
-    # Validate private coaching hours
-    if private_coaching_hours < 0 or private_coaching_hours > MAX_PRIVATE_COACHING_HOURS:
-        print("Invalid number of private coaching hours. Must be between 0 and 5.")
-        return
-
-    # Insert athlete data into the database
-    c.execute('''
-    INSERT INTO athletes (name, martial_art, current_weight, competition_weight, competitions_entered, private_coaching_hours)
-    VALUES (?, ?, ?, ?, ?, ?)
-    ''', (name, martial_art, current_weight, competition_weight, competitions_entered, private_coaching_hours))
-    connection.commit()
-
-    # Calculate costs
-    calculate_costs(name, current_weight, competition_weight, competitions_entered, private_coaching_hours)
-
-def calculate_costs(name, current_weight, competition_weight, competitions_entered, private_coaching_hours):
-    # Calculate costs
-    competition_cost = competitions_entered * COMPETITION_COST
-    private_coaching_cost = private_coaching_hours * PRIVATE_COACHING_COST
-    total_cost = competition_cost + private_coaching_cost
-
-    # Weight comparison
-    weight_comparison = "within" if current_weight <= competition_weight else "over"
-
-    # Output results
-    print(f"\nAthlete's Name: {name}")
-    print("Itemized Costs:")
-    print(f" - Competition Cost: ${competition_cost:.2f}")
-    print(f" - Private Coaching Cost: ${private_coaching_cost:.2f}")
-    print(f"Total Cost of Training and Competitions: ${total_cost:.2f}")
-    print(f"The athlete's current weight is {weight_comparison} the competition weight category.")
-
-def main():
+def get_input(prompt, data_type, min_value=None, max_value=None):
     while True:
-        print("\nMartial Arts Training Cost Calculator")
-        print("1. Add Athlete")
-        print("2. Exit")
-        choice = input("Choose an option: ")
+        try:
+            value = data_type(input(prompt))
+            if min_value is not None and value < min_value:
+                print(f"Value must be at least {min_value}. Try again.")
+                continue
+            if max_value is not None and value > max_value:
+                print(f"Value must be at most {max_value}. Try again.")
+                continue
+            return value
+        except ValueError:
+            print("Invalid input. Please try again.")
 
-        if choice == '1':
-            add_athlete()
-        elif choice == '2':
-            break
-        else:
-            print("Invalid choice. Please try again.")
+# weight category
 
-    # Close the database connection
-    connection.close()
+def get_weight_category(weight):
+    if weight > 100:
+        return "heavyweight"
+    elif weight > 90:
+        return "half-heavyweight"
+    elif weight > 81:
+        return "middleweight"
+    elif weight > 73:
+        return "half-middleweight"
+    elif weight > 66:
+        return "lightweight"
+    else:
+        return "half-lightweight"
 
-if __name__ == "__main__":
-    main()
+# Calculate fees
+
+def calculate_costs(martial_arts_count, competitions, private_hours):
+    # Monthly fee based on number of martial arts
+    if martial_arts_count == 1:
+        monthly_fee = 25.00
+    elif martial_arts_count == 2:
+        monthly_fee = 30.00
+    else:
+        monthly_fee = 35.00
+
+    # Competition fee: $22.00 each
+    comp_fee = competitions * 22.00
+
+    # Private coaching: assume 4 weeks in a month
+    private_fee = private_hours * 9.50 * 4
+
+    total = monthly_fee + comp_fee + private_fee
+    return monthly_fee, comp_fee, private_fee, total
+
+
+
+
+print("\nWelcome to the Athlete Training System!\n")
+
+# 1. Get athlete's name
+name = input("Enter athlete's name: ")
+
+# 2. Martial arts selection
+martial_arts = []
+arts_list = ["Judo", "Jiu-Jitsu", "Karate"]
+
+print("\nChoose martial arts studied:")
+for art in arts_list:
+    choice = input(f"Does the athlete study {art}? (yes/no): ").strip().lower()
+    if choice == 'yes':
+        martial_arts.append(art)
+
+if len(martial_arts) == 0:
+    print("At least one martial art must be selected. Exiting...")
+    exit()
+
+# 3. Get current weight
+weight = get_input("Enter current weight in kg: ", float, min_value=1)
+
+# 4. Get competition category
+comp_category = input("Enter competition weight category: ")
+
+# 5. Competitions this month
+competitions = get_input("Number of competitions this month: ", int, min_value=0)
+
+# 6. Private coaching hours (limit to 0–5)
+private_hours = get_input("Private coaching hours per week (0-5): ", int, 0, 5)
+
+# 7. Store in database
+cursor.execute('''
+INSERT INTO athletes (name, martial_arts, weight, comp_category, competitions, private_hours)
+VALUES (?, ?, ?, ?, ?, ?)
+''', (name, ", ".join(martial_arts), weight, comp_category, competitions, private_hours))
+connection.commit()
+
+# 8. Calculate all costs
+monthly_fee, comp_fee, private_fee, total_cost = calculate_costs(len(martial_arts), competitions, private_hours)
+
+# 9. Determine actual weight category
+actual_category = get_weight_category(weight)
+
+# Output
+
+print("\n----- Athlete Summary -----")
+print(f"Name: {name}")
+print(f"Martial Arts Studied: {', '.join(martial_arts)}")
+print(f"Current Weight: {weight:.2f} kg")
+print(f"Weight Category (based on weight): {actual_category}")
+print(f"Competition Category Entered: {comp_category}")
+
+print("\n----- Cost Breakdown -----")
+print(f"Monthly Training Fee: ${monthly_fee:.2f}")
+print(f"Competition Fees:     ${comp_fee:.2f}")
+print(f"Private Coaching:     ${private_fee:.2f}")
+print(f"Total Monthly Cost:   ${total_cost:.2f}")
+
+
+connection.close()
